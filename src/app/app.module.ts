@@ -15,6 +15,13 @@ import { SerieComponent } from './serie/serie.component';
 import { ActorComponent } from './actor/actor.component';
 
 @NgModule({
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    JsonpModule,
+    RouterModule.forRoot(appRoutes)
+  ],
   declarations: [
     AppComponent,
     MoviesComponent,
@@ -25,13 +32,6 @@ import { ActorComponent } from './actor/actor.component';
     PopularSeriesComponent,
     SerieComponent,
     ActorComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    JsonpModule,
-    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
