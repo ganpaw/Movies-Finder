@@ -32,8 +32,13 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-
-
-
-Note: Upgrade from 4.0 to 5.0
+#Note: Upgrade from 4.0 to 5.0
 npm install @angular/animations@latest @angular/common@latest @angular/compiler@latest @angular/compiler-cli@latest @angular/core@latest @angular/forms@latest @angular/http@latest @angular/platform-browser@latest @angular/platform-browser-dynamic@latest @angular/platform-server@latest @angular/router@latest typescript@2.4.2 rxjs@latest
+
+
+# Create Docker Image and Run Container
+
+1. docker build -t movie-finder-multi-stage:1.0.0 .
+2. docker run --name movie-finder-multi-stage -d -p 4200:80 movie-finder-multi-stage:1.0.0
+3. Browse http://localhost:4200
+4. docker exec -it <docker container id> /bin/sh
