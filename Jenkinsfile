@@ -5,7 +5,9 @@ pipeline {
     dockerImage = ""
   }
 
-  agent any
+   agent{
+        label "k8s-jenkins-docker-slave"
+   } 
 
   stages {
 
