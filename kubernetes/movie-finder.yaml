@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: movie-finder
+  name: movie-finder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-finder
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: movie-finder
+    spec:
+      containers:
+      - image: 192.168.1.8:5000/movie-finder:1.0
+        imagePullPolicy: Always
+        name: movie-finder        
+        resources: {}
+status: {}
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: movie-finder
+    name: movie-finder
+  spec:
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: movie-finder
+    type: NodePort
+  status:
+    loadBalancer: {}
+  
