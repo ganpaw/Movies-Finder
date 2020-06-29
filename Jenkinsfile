@@ -1,34 +1,46 @@
-pipeline{
-    agent{
-        label "jenkins-kube-slave"
+pipeline {
+
+  environment {
+    registry = "192.168.1.8:5000/dealscandy"
+    dockerImage = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/ganpaw/Movies-Finder.git'
+      }
     }
-    stages{
-        stage("build"){
-            steps{
-                echo "========executing A========"
-            }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
+
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
-    post{
-        always{
-            echo "========always========"
+
+    stage('Push Image') {
+      steps{
+        script {
+          docker.withRegistry( "" ) {
+            dockerImage.push()
+          }
         }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
-        }
+      }
     }
+
+    stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "movie-finder.yaml", kubeconfigId: "k8s-jenkins-tiller-cicd-conf")
+        }
+      }
+    }
+
+  }
+
 }
