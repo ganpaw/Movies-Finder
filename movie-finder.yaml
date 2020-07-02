@@ -18,7 +18,7 @@ spec:
         app: movie-finder
     spec:
       containers:
-      - image: 192.168.1.8:5000/dealscandy/movie-finder:1.0
+      - image: 192.168.1.8:5000/dealscandy/movie-finder:latest
         imagePullPolicy: Always
         name: movie-finder        
         resources: {}

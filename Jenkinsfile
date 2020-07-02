@@ -2,6 +2,7 @@ pipeline {
 
   environment {
     registry = "192.168.1.8:5000/dealscandy"
+    artifactId = "movie-finder"
     dockerImage = ""
   }
 
@@ -20,7 +21,7 @@ pipeline {
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + "/${artifactId}:latest"
         }
       }
     }
