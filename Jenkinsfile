@@ -39,7 +39,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "movie-finder.yaml", kubeconfigId: "k8s-jenkins-tiller-cicd-conf")
+          kubernetesDeploy(configs: "movie-finder.yaml", kubeconfigId: "cicd-manager")
         }
       }
     }
